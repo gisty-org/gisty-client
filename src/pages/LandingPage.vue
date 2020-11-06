@@ -4,10 +4,10 @@
         <div class="py-20" style="background: linear-gradient(90deg, #667eea 0%, #764ba2 100%)">
             <div class="container mx-auto px-6">
                 <h2 class="text-4xl font-bold mb-2 text-white">
-                    Smart Health Monitoring Wristwatch!
+                    Gisty!
                 </h2>
                 <h3 class="text-2xl mb-8 text-gray-200">
-                    Monitor your health vitals smartly anywhere you go.
+                    Never miss out on that important meeting ever again.
                 </h3>
                 <router-link to="/register" class="bg-white font-bold rounded-full py-4 px-8 shadow-lg uppercase tracking-wider focus:outline-none hover:bg-gray-200">
                     Sign Up
@@ -19,11 +19,11 @@
                 Features
             </h2>
             <div class="flex items-center flex-wrap mb-20">
-                <div class="w-full md:w-1/2">
-                <h4 class="text-3xl text-gray-800 font-bold mb-3">AI Based Summary Generation</h4>
-                <p class="text-gray-600 mb-8">Our Smart Health Monitoring Wristwatch is able to capture you vitals while you exercise. You can create different category of exercises and can track your vitals on the go.</p>
+                <div class="w-full md:w-1/2 pr-8">
+                    <h4 class="text-3xl text-gray-800 font-bold mb-3">AI Based Video Summarization</h4>
+                    <p class="text-gray-600 mb-8">Gisty captures the content of the meeting in real-time and provides a summary of it. You can easily organize such summaries into different folders.</p>
                 </div>
-                <div class="w-full md:w-1/2 pl-3">
+                <div class="w-full md:w-1/2 pl-8">
                     <img src="../assets/undraw_file_analysis_8k9b.svg" alt="Monitoring" />
                 </div>
             </div>
@@ -33,15 +33,15 @@
                 <img src="../assets/undraw_Recording_re_5xyq.svg" alt="Reporting" />
                 </div>
                 <div class="w-full md:w-1/2 pl-10">
-                <h4 class="text-3xl text-gray-800 font-bold mb-3">Live Recording And Transcription</h4>
-                <p class="text-gray-600 mb-8">Our Smart Health Monitoring Wristwatch can generate a comprehensive report on your vitals depending on your settings either daily, weekly, monthly, quarterly or yearly.</p>
+                <h4 class="text-3xl text-gray-800 font-bold mb-3">Live Transcription And Voice Based Screenshots</h4>
+                <p class="text-gray-600 mb-8">The content is captured by the Gisty Browser Extension using live transcription which is then summarized. Taking snapshots of the meeting is breeze using the voice commands because, for an important meeting, audio is just not enough.</p>
                 </div>
             </div>
 
             <div class="flex items-center flex-wrap mb-20">
                 <div class="w-full md:w-1/2">
-                <h4 class="text-3xl text-gray-800 font-bold mb-3">Share With Other Users</h4>
-                <p class="text-gray-600 mb-8">Our Smart Health Monitoring Wristwatch allows you to sync data across all your mobile devices whether iOS, Android or Windows OS and also to your laptop whether MacOS, GNU/Linux or Windows OS.</p>
+                <h4 class="text-3xl text-gray-800 font-bold mb-3">Share With Others</h4>
+                <p class="text-gray-600 mb-8">Your colleague missed out on a meeting? Don't worry, we've got you covered. Easily share the summaries with everyone along with the snapshots you've captured.</p>
                 </div>
                 <div class="w-full md:w-1/2">
                 <img src="../assets/undraw_shared_workspace_hwky.svg" alt="Syncing" />
@@ -78,10 +78,10 @@
         <section style="background-color: #667eea">
             <div class="container mx-auto px-6 text-center py-20">
                 <h2 class="mb-6 text-4xl font-bold text-center text-white">
-                    Limited in Stock
+                    Well what are you waiting for?
                 </h2>
                 <h3 class="mb-10 text-2xl text-white">
-                    Get yourself the Smart Health Monitoring Wristwatch!
+                    Join Now!
                 </h3>
                 <router-link to="/register" class="bg-white font-bold rounded-full mt-6 py-4 px-8 shadow-lg uppercase tracking-wider">
                     Sign Up

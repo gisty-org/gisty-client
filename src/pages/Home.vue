@@ -1,0 +1,131 @@
+/* eslint-disable vue/comment-directive */
+<template>
+    <div>
+        <base-spinner :show="isLoading"></base-spinner>
+        <div class="grid grid-cols-5 grid-rows-1 h-screen" >
+            <div class="col-span-1 bg-gray-900 pt-12 relative shadow-2xl">
+                <div class="pb-6">
+                    <div class="rounded-full h-32 w-32 mx-auto" style="background-color: #667eea;">
+                        <h1 class="text-center p-4 text-6xl text-white">{{ fullName[0] }}</h1>
+                    </div>
+                    <div class="mx-auto text-center mt-5">
+                        <p class="text-white font-semibold text-xl">{{ 'Hello, ' + fullName }}</p>
+                    </div>
+                </div>
+                <div>
+                    <ul>
+                        <li 
+                            v-for="subject in allSubjects"
+                            :key="subject" 
+                            class="text-white font-semibold text-lg px-3 py-3 align-middle item-hover"
+                            :class="{ isSelected: isCurrentFolder(subject) }"
+                            @click="select(subject)"
+                        >
+                            <b-icon-folder-fill class="inline-block mr-2 mb-1 text-lg" v-if="isCurrentFolder(subject)"></b-icon-folder-fill>
+                            <b-icon-folder class="inline-block mr-2 mb-1 text-lg" v-else></b-icon-folder>
+                            {{ subject }}
+                        </li>
+                    </ul>
+                </div>
+                <div class="h-12 inset-x-0 absolute bottom-0 p-0" @click="logout">
+                    <div class="logout-div text-xl">
+                        <b-icon-arrow-bar-left class="inline-block mr-2 mb-1 text-xl"></b-icon-arrow-bar-left>Logout
+                    </div>
+                </div>
+            </div>
+            <div class="col-span-4 p-16 overflow-auto">
+                <div v-if="isNotSelected" class="text-center mt-32">
+                    <div class="rounded-full w-1/2 mx-auto">
+                        <img src="../assets/undraw_empty_xct9.svg" alt="" class="object-cover">
+                    </div>
+                </div>
+                <div v-else>
+                    <router-view></router-view>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</template>
+
+<script>
+export default {
+    data(){
+        return {
+            isLoading: false
+        }
+    },
+    computed: {
+        fullName(){
+            return this.$store.getters['user/getFullName'];
+        },
+        allSubjects(){
+            return this.$store.getters['summary/getSubjects'];
+        },
+        isNotSelected(){
+            return this.$store.getters['user/getCurrentFolder'] === '';
+        }
+    },
+    methods:{
+        logout(){
+            this.$store.dispatch('user/logout');
+            this.$router.replace('/');
+        },
+        isCurrentFolder(subject){
+            return this.$store.getters['user/getCurrentFolder'] === subject;
+        },
+        select(subject){
+            this.$store.commit('user/setCurrentFolder',{ currentFolder: subject });
+            this.$router.push('/home/' + this.$store.getters['user/getCurrentFolder']);
+        }
+    },
+    async created(){
+        this.isLoading = true;
+        if(localStorage.getItem('user')){
+            const user = JSON.parse(localStorage.getItem('user'));
+            this.$store.commit('user/setUser',user);
+        }
+        await this.$store.dispatch('summary/loadData');
+        this.isLoading = false;
+    }
+}
+</script>
+
+<style scoped>
+
+.logout-div {
+    @apply px-3;
+    @apply py-2;
+    @apply border-t;
+    @apply border-gray-900;
+    @apply border-opacity-50;
+    background-color: #667eea;
+    @apply text-white;
+}
+
+.logout-div a{
+    @apply text-lg;
+    @apply font-medium;
+    @apply text-gray-900;
+}
+
+.isSelected {
+    background-color: #667eea;
+    @apply text-white;
+}
+
+.sidebar{
+    margin-bottom: -5000px;
+    padding-bottom: 5000px;
+}
+
+.container{
+    overflow: hidden;
+}
+
+.item-hover:hover {
+    background-color: #667eea;
+    @apply text-white;
+}
+
+</style>

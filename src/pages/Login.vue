@@ -1,5 +1,6 @@
 <template>
     <div>
+        <base-spinner :show="isLoading"></base-spinner>
         <div class="flex w-full h-screen">
             <div class="bg-white flex flex-col justify-center items-center w-5/12">
                 <div class="w-2/3">
@@ -53,7 +54,8 @@ export default {
             emailError: '',
             passwordError: '',
             isValid: true,
-            rememberMe: false
+            rememberMe: false,
+            isLoading: false
         }
     },
     methods:{
@@ -81,6 +83,7 @@ export default {
             }
         },
         async login(){
+            this.isLoading = true;
             this.validate();
             if(!this.isValid)
                 return;
@@ -99,6 +102,7 @@ export default {
                 this.resetErrors();
                 if(this.rememberMe)
                     localStorage.setItem('rememberMe',true);
+                this.isLoading = false;
                 this.$router.replace('/home');
             }else if(status === 404){
                 this.emailError = "Account not found";
@@ -107,7 +111,7 @@ export default {
             }else{
                 alert("Something went Wrong");
             }
-
+            this.isLoading = false;
         },
     },
     created(){

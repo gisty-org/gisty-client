@@ -1,5 +1,6 @@
 <template>
     <div>
+        <base-spinner :show="isLoading"></base-spinner>
         <div class="flex w-full h-screen">
             <div class="bg-white flex flex-col justify-center items-center w-5/12">
                 <div class="w-2/3">
@@ -74,7 +75,8 @@ export default {
             contactError: '',
             passwordError: '',
             confirmPasswordError: '',
-            isValid: true
+            isValid: true,
+            isLoading: false
         }
     },
     methods:{
@@ -112,6 +114,7 @@ export default {
             }
         },
         async register(){
+            this.isLoading = true;
             this.validate();
 
             if(!this.isValid)
@@ -132,13 +135,14 @@ export default {
             if(status === 200){
                 this.resetInputs();
                 this.resetErrors();
+                this.isLoading = false;
                 this.$router.replace('/home');
             }else if(status === 403){
                 this.emailError = "Email ID already registered";
             }else{
                 alert("Something went Wrong");
             }
-
+            this.isLoading = false;
         },
         resetErrors(){
             this.fullNameError = '';

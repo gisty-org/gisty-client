@@ -159,6 +159,10 @@ export default {
             this.confirmPassword = '';
         }
     },
+    created(){
+        if(localStorage.getItem('rememberMe'))
+            this.$router.replace('/home');
+    }
 }
 </script>
 

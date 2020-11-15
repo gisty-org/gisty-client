@@ -10,11 +10,12 @@
             </div>
         </div>
         <div class="md:flex items-center">
-        <div class="flex flex-col md:flex-row md:mx-6">
-            <router-link class="my-1 text text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0" to="/login" v-if="!isAuthenticated">Login</router-link>
-            <router-link class="my-1 text text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0" to="/register" v-if="!isAuthenticated">Sign Up</router-link>
-            <router-link class="my-1 text text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0" to="/logout" v-if="isAuthenticated">Log Out</router-link>
-        </div>
+            <div class="flex flex-col md:flex-row md:mx-6">
+                <router-link class="my-1 text text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0" to="/login" v-if="!isAuthenticated">Login</router-link>
+                <router-link class="my-1 text text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0" to="/register" v-if="!isAuthenticated">Sign Up</router-link>
+                <router-link class="my-1 text text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0" to="/home" v-if="isAuthenticated">Home</router-link>
+                <router-link class="my-1 text text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0" to="/logout" v-if="isAuthenticated">Log Out</router-link>
+            </div>
         </div>
     </div>
     </nav>
@@ -24,9 +25,9 @@
 export default {
     computed:{
         isAuthenticated(){
-            return this.$store.isAuthenticated;
+            return localStorage.getItem('isAuthenticated') ? localStorage.getItem('isAuthenticated') : false;
         }
-    }
+    },
 }
 </script>
 

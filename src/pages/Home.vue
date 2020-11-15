@@ -3,8 +3,8 @@
     <div>
         <base-spinner :show="isLoading"></base-spinner>
         <div class="grid grid-cols-5 grid-rows-1 h-screen" >
-            <div class="col-span-1 pt-12 relative shadow-2xl" style="background-color: #667eea;">
-                <div class="pb-6">
+            <div class="col-span-1 pt-12  items-center relative shadow-2xl" style="background-color: #667eea;">
+                <div class="pb-6" @click="this.$router.push('/profile')">
                     <div class="rounded-full h-32 w-32 mx-auto bg-white" >
                         <h1 class="text-center p-4 text-6xl" style="color: #667eea;">{{ fullName[0] }}</h1>
                     </div>
@@ -13,7 +13,7 @@
                     </div>
                 </div>
                 <div>
-                    <ul>
+                    <ul class="overflow-scroll" style="height: 29rem">
                         <li 
                             v-for="subject in allSubjects"
                             :key="subject" 
@@ -126,5 +126,4 @@ export default {
     background-color:white;
     color: #667eea;
 }
-
 </style>

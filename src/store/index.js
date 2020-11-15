@@ -2,7 +2,6 @@ import { createStore } from 'vuex';
 import userModule from './user/index';
 import summaryModule from './summary/index';
 
-
 const store = createStore({
     modules:{
         user: userModule,
@@ -10,7 +9,7 @@ const store = createStore({
     },
     state(){
         return {
-            url: 'https://gisty-server.herokuapp.com/api',
+            url: process.env.VUE_APP_API_BASE_URL,
             config: {
                 headers: {
                     ContentType: 'application/json'

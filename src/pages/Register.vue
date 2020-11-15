@@ -160,8 +160,12 @@ export default {
         }
     },
     created(){
-        if(localStorage.getItem('rememberMe'))
+        if(localStorage.getItem('rememberMe')){
+            this.$store.commit('user/setAuth',{
+                isAuthenticated: true
+            })
             this.$router.replace('/home');
+        }
     }
 }
 </script>

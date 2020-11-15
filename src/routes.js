@@ -8,6 +8,7 @@ import Register from './pages/Register.vue';
 import FileGrid from './components/FileGrid.vue';
 import ViewSummary from './components/ViewSummary.vue';
 import ForgotPassword from './pages/ForgotPassword.vue';
+import Profile from './pages/Profile.vue';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -16,7 +17,19 @@ const router = createRouter({
         { path: '/login', component: Login },
         { path: '/forgot_password', component: ForgotPassword },
         { path: '/register', component: Register },
-        { path: '/logout', redirect: '/login' },
+        { 
+            path: '/logout', 
+            redirect: '/login',
+            beforeEnter: (to,from,next) => {
+                if(localStorage.getItem('user'))
+                    localStorage.removeItem('user');
+                if(localStorage.getItem('isAuthenticated'))
+                    localStorage.removeItem('isAuthenticated');
+                if(localStorage.getItem('rememberMe'))
+                    localStorage.removeItem('rememberMe');
+                next('/login');
+            },
+        },
         { path: '/about', componenent: null },
         { 
             path: '/home', 
@@ -33,6 +46,7 @@ const router = createRouter({
                 { path: ':folderName/:fileId', component: ViewSummary, props:true}
             ]
         },
+        { path: '/profile', component: Profile}
     ]
 });
 

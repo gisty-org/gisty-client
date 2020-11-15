@@ -3,7 +3,7 @@
         <div>
             <div class="grid grid-cols-4 gap-6">
                 <div v-for="summary in summaries" :key="summary.id" class="text-center" v-on:click="open(summary.id)">
-                    <base-card :isDark="false" :hover="true">
+                    <base-card :isDark="false" :hover="true" :hasPadding="true">
                         <img src="../assets/output-onlinepngtools.png" alt="file_icon">
                         <h3 class="text-xl mt-2">{{ summary.title }}</h3>
                     </base-card>

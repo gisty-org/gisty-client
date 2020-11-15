@@ -69,5 +69,31 @@ export default {
         }catch(error){
             return error.response.status;
         }
+    },
+    async getProfile(context){
+        const url = context.rootGetters.getUrl + '/profile/' + context.rootGetters['user/getUserId'] + '/edit';
+        try{
+            const response = await axios.get(
+                url
+            );
+            context.commit('setUser',response.data.user);
+            return response.status;
+        }catch(error){
+            return error.response.status;
+        }
+    },
+    async editProfile(context,payload){
+        const url = context.rootGetters.getUrl + '/profile/' + context.rootGetters['user/getUserId'];
+        try{
+            const response = await axios.put(
+                url,
+                payload.body,
+                context.rootGetters.getConfig
+            );
+            context.commit('setUser',response.data.user);
+            return response.status;
+        }catch(error){
+            return error.response.status;
+        }
     }
 }

@@ -1,6 +1,6 @@
 <template>
-    <div class="rounded-lg border md:shadow w-full overflow-hidden object-center py-5 px-5" :class="{dark: isDark,
-    'hover:bg-gray-200': hover}">
+    <div class="rounded-lg border md:shadow w-full overflow-hidden object-center" :class="{dark: isDark,
+    'hover:bg-gray-200': hover, padding: hasPadding}">
         <slot>
 
         </slot>
@@ -9,7 +9,7 @@
 
 <script>
 export default {
-    props:['isDark','hover']
+    props:['isDark','hover','hasPadding']
 }
 </script>
 
@@ -17,5 +17,10 @@ export default {
 .dark{
     @apply bg-gray-900;
     @apply text-white;
+}
+
+.padding{
+    @apply px-5;
+    @apply py-5;
 }
 </style>

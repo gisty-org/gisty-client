@@ -91,6 +91,7 @@ export default {
                 context.rootGetters.getConfig
             );
             context.commit('setUser',response.data.user);
+            localStorage.setItem('user',JSON.stringify(response.data.user));
             return response.status;
         }catch(error){
             return error.response.status;

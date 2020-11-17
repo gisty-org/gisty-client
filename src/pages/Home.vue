@@ -9,7 +9,7 @@
                         <h1 class="text-center p-4 text-6xl" style="color: #667eea;">{{ fullName[0] }}</h1>
                     </div>
                     <div class="mx-auto text-center mt-5">
-                        <p class="text-white font-semibold text-xl">{{ 'Hello, ' + fullName }}</p>
+                        <p class="text-white font-semibold text-xl">{{ 'Hello, ' + fullName }} <b-icon-pencil-square class="inline-block ml-1 mb-1 text-xl"></b-icon-pencil-square></p>
                     </div>
                 </div>
                 <div>

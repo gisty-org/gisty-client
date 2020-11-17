@@ -12,8 +12,8 @@
                         <p class="text-white font-semibold text-xl">{{ 'Hello, ' + fullName }} <b-icon-pencil-square class="inline-block ml-1 mb-1 text-xl"></b-icon-pencil-square></p>
                     </div>
                 </div>
-                <div>
-                    <ul class="overflow-scroll" style="height: 29rem">
+                <div style="height: 50%;">
+                    <ul class="overflow-scroll" style="max-height: 100%">
                         <li 
                             v-for="subject in allSubjects"
                             :key="subject" 

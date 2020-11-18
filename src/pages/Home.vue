@@ -13,7 +13,7 @@
                     </div>
                 </div>
                 <div style="height: 50%;">
-                    <ul class="overflow-scroll" style="max-height: 100%">
+                    <ul class="overflow-auto" style="max-height: 100%">
                         <li 
                             v-for="subject in allSubjects"
                             :key="subject" 

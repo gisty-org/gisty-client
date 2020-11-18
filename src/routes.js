@@ -19,7 +19,6 @@ const router = createRouter({
         { path: '/register', component: Register },
         { 
             path: '/logout', 
-            redirect: '/login',
             beforeEnter: (to,from,next) => {
                 if(localStorage.getItem('user'))
                     localStorage.removeItem('user');
@@ -27,7 +26,7 @@ const router = createRouter({
                     localStorage.removeItem('isAuthenticated');
                 if(localStorage.getItem('rememberMe'))
                     localStorage.removeItem('rememberMe');
-                next('/login');
+                next('/');
             },
         },
         { path: '/about', componenent: null },

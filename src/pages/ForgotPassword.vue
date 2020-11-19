@@ -97,6 +97,7 @@ export default {
             const emailPattern = new RegExp(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/);
             if(!emailPattern.test(this.email)){
                 this.emailError = '*Please enter a valid email address';
+                this.isLoading = false;
                 return;
             }
             const status = await this.$store.dispatch('user/requestOTP',{ 

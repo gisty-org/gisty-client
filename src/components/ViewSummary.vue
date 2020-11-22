@@ -1,6 +1,9 @@
 <template>
     <div>
+        <!-- Spinner -->
         <base-spinner :show="isLoading"></base-spinner>
+
+        <!-- Snapshot Preview -->
         <image-view :show="showImageView" @close="viewSnapshot(null)" >
             <template v-slot:default>
                 <img :src="currentSnapshot.url" alt="snapshot">
@@ -11,6 +14,8 @@
                 </div>
             </template>
         </image-view>
+
+        <!-- Summary Delete Dialog -->
         <base-dialog :show="showConfirmSummaryDeleteDialog" @close="toggleConfirmSummaryDeleteDialog(false)">
             <template #header>
                 <h1 class="text-gray-900 text-xl">
@@ -36,6 +41,8 @@
                 </div>
             </template>
         </base-dialog>
+
+        <!-- Snapshot Delete Dialog -->
         <base-dialog :show="showConfirmSnapshotDeleteDialog" @close="toggleConfirmSnapshotDeleteDialog(false)">
             <template #header>
                 <h1 class="text-gray-900 text-xl">
@@ -61,6 +68,8 @@
                 </div>
             </template>
         </base-dialog>
+
+        <!-- Share summary dialog -->
         <base-dialog :show="showShareSummaryDialog" @close="toggleShareSummaryDialog(false)">
             <template #header>
                 <h1 class="text-gray-900 text-xl">
@@ -90,6 +99,8 @@
                 </div>
             </template>
         </base-dialog>
+
+        <!-- Summary title -->
         <div class="flex justify-between">
             <button @click="goBack" class="focus:outline-none hover:bg-gray-200 p-2 rounded">
                 <b-icon-arrow-left class="inline-block mb-1 text-3xl"></b-icon-arrow-left>
@@ -107,12 +118,36 @@
             </div>
         </div>
         
-        <div class="mt-10 mx-12">
+        <!-- tabs -->
+        <div class="w-1/2 bg-gray-100 mx-auto mt-12 rounded-lg">
+            <div class="w-1/2 text-center inline-block border-r"  @click="setCurrentTab('summary')">
+                <p 
+                    class="text-2xl font-semibold rounded-l-lg text-gray-700"
+                    :class="{ 'is-selected': isCurrentTab('summary') }"
+                >Summary</p>
+            </div>
+            <div class="w-1/2 text-center inline-block" @click="setCurrentTab('snapshots')">
+                 <p 
+                    class="text-2xl font-semibold rounded-r-lg text-gray-700"
+                    :class="{ 'is-selected': isCurrentTab('snapshots') }"
+                >Snapshots</p>
+            </div>
+        </div>
+
+        <!-- summary -->
+        <div class="mt-10 mx-12" v-if="isCurrentTab('summary')">
             <article class="text-xl tracking-wide">
-                {{ summary.content }}
+                <div v-for="(point,index) in summary.content.split('.')" :key="index">
+                    <li v-if="point!=='' && point!==' '" class="m-3">
+                        {{ point + '.' }}
+                    </li>
+                </div>
+                
             </article>
         </div>
-        <section class="mt-10">
+
+        <!-- snapshots -->
+        <section class="mt-10" v-else>
             <div  v-if="snapshotsPresent">
                 <div class="text-center text-3xl text-gray-800 font-semibold">
                     <h1>Snapshots</h1>
@@ -146,10 +181,17 @@ export default {
             showShareSummaryDialog: false,
             credential: '',
             credentialError: '',
-            isLoading: false
+            isLoading: false,
+            currentTab: null
         }
     },
     methods:{
+        setCurrentTab(value){
+            this.currentTab = value;
+        },
+        isCurrentTab(value){
+            return this.currentTab === value;
+        },
         goBack(){
             this.$router.back();
         },
@@ -240,6 +282,7 @@ export default {
             return s.id === Number(this.fileId);
         });
         this.snapshots = this.summary.snapshots;
+        this.currentTab = 'summary';
         this.isLoading = false;
     },
     computed:{
@@ -300,5 +343,9 @@ export default {
     @apply text-xs;
     @apply text-red-600;
     @apply mt-1;
+}
+.is-selected {
+    background-color: #667eea;
+    @apply text-white;
 }
 </style>

@@ -39,7 +39,7 @@
                         <img src="../assets/undraw_empty_xct9.svg" alt="" class="object-cover">
                     </div>
                 </div>
-                <div v-else>
+                <div v-else class="pb-6">
                     <router-view></router-view>
                 </div>
             </div>

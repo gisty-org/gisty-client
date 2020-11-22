@@ -78,7 +78,7 @@
         <section style="background-color: #667eea">
             <div class="container mx-auto px-6 text-center py-20">
                 <h2 class="mb-6 text-4xl font-bold text-center text-white">
-                    Well what are you waiting for?
+                    Well, what are you waiting for?
                 </h2>
                 <h3 class="mb-10 text-2xl text-white">
                     Join Now!

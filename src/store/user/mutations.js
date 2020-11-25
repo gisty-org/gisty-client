@@ -4,6 +4,7 @@ export default {
         state.user.fullname = payload.fullname;
         state.user.email = payload.email;
         state.user.contact = payload.contact;
+        state.user.profile = payload.profile
     },
     setAuth(state,payload){
         state.user.isAuthenticated = payload.isAuthenticated;

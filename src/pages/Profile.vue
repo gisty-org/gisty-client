@@ -8,13 +8,9 @@
 
                 </div>
                 <div class="flex justify-center -mt-8">
-                    <!-- <img src="https://i.imgur.com/8Km9tLL.jpg" class="rounded-full border-solid border-white border-2 -mt-3 h-24 w-24">-->
-                    <div class="rounded-full border-solid border-white border-2 h-24 w-24 -mt-3" style="background-color: #667eea;">
-                        <h1 class="text-center text-6xl text-white">{{ initial }}</h1>
-                        
-                    </div>
+                    <base-image @profile="selectImage" class="border-white border-2 shadow-lg -mt-3" :default-image="getProfile" ></base-image>
                 </div>
-                <form @submit.prevent="update" class="mx-5 my-5">
+                <form @submit.prevent="update" class="mx-5 my-3">
                     <div class="input-div">
                         <label class="input-label" for="fullName">Full Name</label>
                         <input id="fullName" class="custom-input" type="text" v-model.trim="fullName" />
@@ -50,6 +46,8 @@ export default {
             fullName: '',
             email: '',
             contact: '',
+            profile: '',
+            image: null,
             fullNameError: '',
             emailError: '',
             contactError: '',
@@ -58,6 +56,10 @@ export default {
         }
     },
     methods: {
+        selectImage(image){
+            this.image = image;
+            console.log(this.image);
+        },
         resetErrors(){
             this.fullNameError = '';
             this.emailError = '';
@@ -101,8 +103,9 @@ export default {
                 body: {
                     fullName: this.fullName,
                     email: this.email,
-                    contact: this.contact
-                }
+                    contact: this.contact,
+                },
+                image: this.image
             });
 
             if(status === 200){
@@ -111,6 +114,7 @@ export default {
                 this.fullName = this.$store.getters['user/getFullName'];
                 this.email = this.$store.getters['user/getEmail'];
                 this.contact = this.$store.getters['user/getContact'];
+                this.profile = this.getProfile;
                 this.isLoading = false;
             }else if(status === 403){
                 this.emailError = "Email ID already in use";
@@ -124,6 +128,12 @@ export default {
     computed:{
         initial(){
             return this.$store.getters['user/getFullName'][0];
+        },
+        getProfile(){
+            return this.$store.getters['user/getProfile'];
+        },
+        hasProfile(){
+            return !!this.$store.getters['user/getProfile'];
         }
     },
     async created(){
@@ -136,6 +146,7 @@ export default {
         this.fullName = this.$store.getters['user/getFullName'];
         this.email = this.$store.getters['user/getEmail'];
         this.contact = this.$store.getters['user/getContact'];
+        this.profile = this.$store.getters['user/getProfile'];
         this.isLoading = false;
     }
 }

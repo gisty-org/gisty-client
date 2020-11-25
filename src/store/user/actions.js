@@ -18,21 +18,48 @@ export default {
 
         return status;
     },
-    register(context,payload){
-        const status = axios.post(
-            context.rootGetters.getUrl + '/register',
-            payload.body,
-            context.rootGetters.getConfig
-        ).then(response => {
+    async register(context,payload){
+        
+        if(payload.image){
+            const formData = new FormData();
+            formData.append('file', payload.image);
+            formData.append('tags', 'profile image');
+            formData.append('public_id',payload.body.email.split('@')[0])
+            formData.append('upload_preset', process.env.VUE_APP_CLOUDINARY_UPLOAD_PRESET);
+
+            try{
+                const response = await axios.post(
+                    process.env.VUE_APP_CLOUDINARY_URL,
+                    formData,
+                    {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    }  
+                );
+                payload.body.profile = response.data.secure_url;
+            }catch(error){
+                console.log(error);
+            }
+        }else{
+            payload.body.profile = null;
+        }
+
+        
+        try{
+            const response = await axios.post(
+                context.rootGetters.getUrl + '/register',
+                payload.body,
+                context.rootGetters.getConfig
+            );
             context.commit('setUser',response.data.user);
             context.commit('setAuth',{ isAuthenticated: true });
             localStorage.setItem('user',JSON.stringify(response.data.user));
             localStorage.setItem('isAuthenticated',context.getters.isAuthenticated);
             return response.status;
-        }).catch(error => {
+        }catch(error){
             return error.response.status;
-        });
-        return status;
+        }
     },
     logout(context){
         context.commit('setAuth',{ isAuthenticated: false });
@@ -83,6 +110,31 @@ export default {
         }
     },
     async editProfile(context,payload){
+        if(payload.image){
+            const formData = new FormData();
+            formData.append('file', payload.image);
+            formData.append('tags', 'profile image');
+            formData.append('public_id',payload.body.email.split('@')[0]);
+            formData.append('upload_preset', process.env.VUE_APP_CLOUDINARY_UPLOAD_PRESET);
+
+            try{
+                const response = await axios.post(
+                    process.env.VUE_APP_CLOUDINARY_URL,
+                    formData,
+                    {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    }  
+                );
+                payload.body.profile = response.data.secure_url;
+            }catch(error){
+                console.log(error);
+            }
+        }else{
+            payload.body.profile = context.rootGetters['user/getProfile'];
+        }
+
         const url = context.rootGetters.getUrl + '/profile/' + context.rootGetters['user/getUserId'];
         try{
             const response = await axios.put(

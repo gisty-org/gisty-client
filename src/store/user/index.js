@@ -12,6 +12,7 @@ export default {
                 fullname: '',
                 email: '',
                 contact: '',
+                profile: '',
                 isAuthenticated: false,
                 currentFolder: ''
             },

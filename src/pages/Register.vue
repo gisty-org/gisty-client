@@ -5,9 +5,7 @@
             <div class="bg-white flex flex-col justify-center items-center w-5/12">
                 <div class="w-2/3">
                     <div class="w-full text-center mb-3">
-                        <router-link to="/" class="font-bold text-5xl" style="color: #667eea">
-                            Gisty
-                        </router-link>
+                        <base-image @profile="selectImage" :default-image="null"></base-image>
                     </div>
                     <form @submit.prevent="register">
                         <div class="input-div flex justify-between">
@@ -76,10 +74,14 @@ export default {
             passwordError: '',
             confirmPasswordError: '',
             isValid: true,
-            isLoading: false
+            isLoading: false,
+            image: null,
         }
     },
     methods:{
+        selectImage(image){
+            this.image = image;
+        },
         validate(){
             this.isValid = true;
             this.resetErrors();
@@ -117,8 +119,10 @@ export default {
             this.isLoading = true;
             this.validate();
 
-            if(!this.isValid)
+            if(!this.isValid){
+                this.isLoading = false;
                 return;
+            }
 
             const body = {
                 fullname: this.firstName + ' ' + this.lastName,
@@ -126,10 +130,10 @@ export default {
                 contact: this.contact,
                 password: this.password 
             };
-    
 
             const status  = await this.$store.dispatch('user/register',{
-                body: body
+                body: body,
+                image: this.image
             });
 
             if(status === 200){
@@ -157,6 +161,7 @@ export default {
             this.contact = '';
             this.password = '';
             this.confirmPassword = '';
+            this.image = null;
         }
     },
     created(){

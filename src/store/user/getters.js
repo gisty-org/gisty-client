@@ -19,5 +19,8 @@ export default {
     },
     getOTP(state){
         return state.otp;
+    },
+    getProfile(state){
+        return state.user.profile;
     }
 }

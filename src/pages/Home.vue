@@ -5,7 +5,10 @@
         <div class="grid grid-cols-5 grid-rows-1 h-screen" >
             <div class="col-span-1 pt-12  items-center relative shadow-2xl" style="background-color: #667eea;">
                 <div class="pb-6" @click="this.$router.push('/profile')">
-                    <div class="rounded-full h-32 w-32 mx-auto bg-white" >
+                    <div class="rounded-full h-32 w-32 mx-auto bg-center bg-cover block border-white border-2 shadow-lg" v-if="hasProfile" :style="{'background-image': `url(${getProfile})`}" >
+                        
+                    </div>
+                    <div v-else class="rounded-full h-32 w-32 mx-auto bg-white">
                         <h1 class="text-center p-4 text-6xl" style="color: #667eea;">{{ fullName[0] }}</h1>
                     </div>
                     <div class="mx-auto text-center mt-5">
@@ -22,7 +25,6 @@
                             @click="select(subject)"
                         >
                             <b-icon-folder-fill class="inline-block mr-2 mb-1 text-lg"></b-icon-folder-fill>
-                            <!-- <b-icon-folder class="inline-block mr-2 mb-1 text-lg"></b-icon-folder> -->
                             {{ subject }}
                         </li>
                     </ul>
@@ -64,6 +66,12 @@ export default {
         },
         isNotSelected(){
             return this.$store.getters['user/getCurrentFolder'] === '';
+        },
+        getProfile(){
+            return this.$store.getters['user/getProfile'];
+        },
+        hasProfile(){
+            return !!this.$store.getters['user/getProfile'];
         }
     },
     methods:{
@@ -82,10 +90,12 @@ export default {
     async created(){
         this.isLoading = true;
         if(localStorage.getItem('user')){
-            const user = JSON.parse(localStorage.getItem('user'));
+            const user = JSON.parse(localStorage.getItem('user'))
             this.$store.commit('user/setUser',user);
         }
         await this.$store.dispatch('summary/loadData');
+    },
+    mounted(){
         this.isLoading = false;
     }
 }

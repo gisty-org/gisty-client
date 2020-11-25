@@ -118,8 +118,6 @@ export default {
             formData.append('upload_preset', process.env.VUE_APP_CLOUDINARY_UPLOAD_PRESET);
 
             try{
-                console.log(process.env.VUE_APP_CLOUDINARY_URL);
-                console.log(process.env.VUE_APP_CLOUDINARY_UPLOAD_PRESET);
                 const response = await axios.post(
                     process.env.VUE_APP_CLOUDINARY_URL,
                     formData,
@@ -129,7 +127,6 @@ export default {
                         }
                     }  
                 );
-                console.log(response.data);
                 payload.body.profile = response.data.secure_url;
             }catch(error){
                 console.log(error);

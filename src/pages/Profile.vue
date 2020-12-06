@@ -58,7 +58,6 @@ export default {
     methods: {
         selectImage(image){
             this.image = image;
-            console.log(this.image);
         },
         resetErrors(){
             this.fullNameError = '';
@@ -146,7 +145,7 @@ export default {
         this.fullName = this.$store.getters['user/getFullName'];
         this.email = this.$store.getters['user/getEmail'];
         this.contact = this.$store.getters['user/getContact'];
-        this.profile = this.$store.getters['user/getProfile'];
+        this.profile = this.getProfile;
         this.isLoading = false;
     }
 }

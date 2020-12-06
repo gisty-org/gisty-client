@@ -26,7 +26,8 @@ export default {
     async register(context,payload){
         
         if(payload.image){
-            let public_id = 'profile/' + payload.body.email.split('@')[0];
+            let public_id = process.env.VUE_APP_DEBUG ? 'dev' : 'production';
+            public_id += '/profile/' + payload.body.email.split('@')[0];
             let url = process.env.VUE_APP_CLOUDINARY_URL;
             let preset = process.env.VUE_APP_CLOUDINARY_UPLOAD_PRESET;
             let timeStamp = Math.floor(+new Date() / 1000);
@@ -125,7 +126,8 @@ export default {
     },
     async editProfile(context,payload){
         if(payload.image){
-            let public_id = 'profile/' + payload.body.email.split('@')[0];
+            let public_id = process.env.VUE_APP_DEBUG ? 'dev' : 'production';
+            public_id += '/profile/' + payload.body.email.split('@')[0];
             let url = process.env.VUE_APP_CLOUDINARY_URL;
             let preset = process.env.VUE_APP_CLOUDINARY_UPLOAD_PRESET;
             let timeStamp = Math.floor(+new Date() / 1000);

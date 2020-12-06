@@ -1,4 +1,9 @@
 import axios from 'axios';
+import crypto from 'crypto';
+
+function getSignature(input) {
+    return crypto.createHash('sha256').update(input).digest('hex');
+}
 
 export default {
     login(context,payload){
@@ -21,15 +26,24 @@ export default {
     async register(context,payload){
         
         if(payload.image){
+            let public_id = 'profile/' + payload.body.email.split('@')[0];
+            let url = process.env.VUE_APP_CLOUDINARY_URL;
+            let preset = process.env.VUE_APP_CLOUDINARY_UPLOAD_PRESET;
+            let timeStamp = Math.floor(+new Date() / 1000);
+            let signature = `overwrite=true&public_id=${public_id}&tags=profile_image&timestamp=${timeStamp}&upload_preset=ml_default${process.env.VUE_APP_CLOUDINARY_API_SECRET}`;
+
             const formData = new FormData();
             formData.append('file', payload.image);
-            formData.append('tags', 'profile image');
-            formData.append('public_id',payload.body.email.split('@')[0])
-            formData.append('upload_preset', process.env.VUE_APP_CLOUDINARY_UPLOAD_PRESET);
-
+            formData.append('tags', 'profile_image');
+            formData.append('public_id',public_id);
+            formData.append('overwrite',true);
+            formData.append('signature',getSignature(signature));
+            formData.append('api_key',process.env.VUE_APP_CLOUDINARY_API_KEY);
+            formData.append('timestamp',timeStamp);
+            formData.append('upload_preset', preset);
             try{
                 const response = await axios.post(
-                    process.env.VUE_APP_CLOUDINARY_URL,
+                    url,
                     formData,
                     {
                         headers: {
@@ -111,15 +125,24 @@ export default {
     },
     async editProfile(context,payload){
         if(payload.image){
+            let public_id = 'profile/' + payload.body.email.split('@')[0];
+            let url = process.env.VUE_APP_CLOUDINARY_URL;
+            let preset = process.env.VUE_APP_CLOUDINARY_UPLOAD_PRESET;
+            let timeStamp = Math.floor(+new Date() / 1000);
+            let signature = `overwrite=true&public_id=${public_id}&tags=profile_image&timestamp=${timeStamp}&upload_preset=ml_default${process.env.VUE_APP_CLOUDINARY_API_SECRET}`;
+
             const formData = new FormData();
             formData.append('file', payload.image);
-            formData.append('tags', 'profile image');
-            formData.append('public_id',payload.body.email.split('@')[0]);
-            formData.append('upload_preset', process.env.VUE_APP_CLOUDINARY_UPLOAD_PRESET);
-
+            formData.append('tags', 'profile_image');
+            formData.append('public_id',public_id);
+            formData.append('overwrite',true);
+            formData.append('signature',getSignature(signature));
+            formData.append('api_key',process.env.VUE_APP_CLOUDINARY_API_KEY);
+            formData.append('timestamp',timeStamp);
+            formData.append('upload_preset', preset);
             try{
                 const response = await axios.post(
-                    process.env.VUE_APP_CLOUDINARY_URL,
+                    url,
                     formData,
                     {
                         headers: {

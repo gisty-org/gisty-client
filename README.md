@@ -2,8 +2,8 @@
 
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-sucess.svg)](https://gitHub.com/gisty-org/gisty-client/graphs/commit-activity)
 [![Issues Open](https://img.shields.io/github/issues/gisty-org/gisty-client)](https://github.com/gisty-org/gisty-client/issues)
-[![Forks](https://img.shields.io/github/forks/gisty-org/gisty-client)](https://github.com/gisty-org/gisty-/forks)
-[![Stars](https://img.shields.io/github/stars/gisty-org/gisty-client)](https://github.com/gisty-org/gisty-/stars)
+[![Forks](https://img.shields.io/github/forks/gisty-org/gisty-client)](https://github.com/gisty-org/gisty-client/network/members)
+[![Stars](https://img.shields.io/github/stars/gisty-org/gisty-client)](https://github.com/gisty-org/gisty-client/stargazers)
 [![GitHub contributors](https://img.shields.io/github/contributors/gisty-org/gisty-client)](https://gitHub.com/gisty-org/gisty-client/graphs/contributors/)
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](https://github.com/gisty-org/gisty-client/issues)
 [![MIT license](https://img.shields.io/badge/License-MIT-informational.svg)](https://lbesson.mit-license.org/)
